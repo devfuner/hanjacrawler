@@ -2,7 +2,7 @@
 # 교육 취업 - 신문은 선생님
 # http://news.chosun.com/svc/list_in/list.html?catid=B2
 
-
+import sys
 import os
 import shutil
 
@@ -88,10 +88,18 @@ def crawler():
 
 
 if __name__ == '__main__':
+    # argv[0]은 실행할 파이썬 파일명이 들어감
+    if len(sys.argv) == 2:
+        page = sys.argv[1]
+    else:
+        print('example> python main.py 1')
+        exit(0)
+
     # 목록 URL
     # pn 페이지 번호
     list_url = 'http://news.chosun.com/svc/list_in/list.html?catid=B2&pn={page}'
-    formatted_url = list_url.format(page=2)
+    formatted_url = list_url.format(page=page)
+    print('page url :', formatted_url)
 
     titles = find_title(fetch(formatted_url, UTF_8))
 
